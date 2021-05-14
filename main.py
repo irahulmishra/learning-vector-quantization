@@ -1,6 +1,7 @@
 from math import sqrt
 from random import randrange
 from random import seed
+import matplotlib.pyplot as plt
 
 
 # calculate the Euclidean distance between two vectors
@@ -30,7 +31,7 @@ def random_prototype(train_data):
 
 
 # Train a set of prototype vectors
-def train_codebooks(train, no_of_prototypes, learning_rate, epochs):
+def update_prototypes(train, no_of_prototypes, learning_rate, epochs):
     prototypes = [random_prototype(train) for i in range(no_of_prototypes)]
     for epoch in range(epochs):
         rate = learning_rate * (1.0 - (epoch / float(epochs)))
@@ -61,7 +62,9 @@ dataset = [[2.7810836, 2.550537003, 0],
            [8.675418651, -0.242068655, 1],
            [7.673756466, 3.508563011, 1]]
 learn_rate = 0.3
-n_epochs = 10
-n_codebooks = 2
-codebooks = train_codebooks(dataset, n_codebooks, learn_rate, n_epochs)
-print('Codebooks: %s' % codebooks)
+n_epochs = 20
+n_prototypes = 3
+prototypes_updated = update_prototypes(dataset, n_prototypes, learn_rate, n_epochs)
+print('Codebooks: %s' % prototypes_updated)
+
+
